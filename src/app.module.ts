@@ -5,7 +5,7 @@ import { StudentsModule } from './students/students.module';
 @Module({
   imports: [
     StudentsModule,
-    MongooseModule.forRoot('mongodb://mongo:WxfjNbEYetcLoBFmdNpwUJiccKeTrAbN@mongodb.railway.internal:27017/tierraprometida'),
+    MongooseModule.forRoot('mongodb://mongo:WxfjNbEYetcLoBFmdNpwUJiccKeTrAbN@junction.proxy.rlwy.net:44487'),
   ],
   controllers: [],
   providers: [],
