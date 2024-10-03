@@ -13,12 +13,14 @@ async function bootstrap() {
   app.setGlobalPrefix('api/tierraprometida/v1');
 
   // Habilitar CORS para permitir solicitudes desde otros orígenes
-  app.enableCors({
-    origin: 'http://localhost:3001',  // Reemplazar con el dominio de tu frontend si es necesario
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true  // Si necesitas permitir el envío de cookies
-  });
+  
+  // {
+  //   origin: 'http://localhost:3001',  // Reemplazar con el dominio de tu frontend si es necesario
+  //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  //   credentials: true  // Si necesitas permitir el envío de cookies
+  // }
 
+  app.enableCors();
   await app.listen(3000);
 }
 
