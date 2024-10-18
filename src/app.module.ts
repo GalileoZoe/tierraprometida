@@ -5,8 +5,7 @@ import { StudentsModule } from './students/students.module';
 @Module({
   imports: [
     StudentsModule,
-    MongooseModule.forRoot('mongodb://mongo:WxfjNbEYetcLoBFmdNpwUJiccKeTrAbN@junction.proxy.rlwy.net:44487'),
-  ],
+    MongooseModule.forRoot('mongodb://mongo:iSYjHUidqXllgiIdvhrCdxydVUyiMvcM@junction.proxy.rlwy.net:49497'),  ],
   controllers: [],
   providers: [],
 })
