@@ -1,7 +1,11 @@
-import { IsString, IsOptional, IsEmail, IsNumber } from 'class-validator';
+import { IsString, IsOptional, } from 'class-validator';
 import { StudentStatus } from '../schema/students.schema';
 
 export class CreateStudent {
+
+    @IsString()
+    @IsOptional()
+    number: string;
 
     @IsString()
     @IsOptional()
@@ -27,7 +31,7 @@ export class CreateStudent {
     @IsOptional()
     curp?: string;
 
-    @IsEmail()
+    @IsString()
     @IsOptional()
     email?: string;
 

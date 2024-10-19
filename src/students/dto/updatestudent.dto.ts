@@ -5,6 +5,10 @@ export class UpdateStudent {
 
     @IsString()
     @IsOptional()
+    number?: string;
+
+    @IsString()
+    @IsOptional()
     name?: string;
 
     @IsString()
@@ -27,7 +31,7 @@ export class UpdateStudent {
     @IsOptional()
     curp?: string;
 
-    @IsEmail()
+    @IsString()
     @IsOptional()
     email?: string;
 

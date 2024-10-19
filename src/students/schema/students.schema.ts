@@ -11,6 +11,9 @@ export enum StudentStatus {
 export class Students extends Document {
 
     @Prop()
+    number?: string;
+
+    @Prop()
     name?: string;
 
     @Prop()
