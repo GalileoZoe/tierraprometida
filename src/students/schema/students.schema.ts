@@ -50,6 +50,9 @@ export class Students extends Document {
     tutor?: string;
 
     @Prop()
+    stay?: string;
+
+    @Prop()
     file?: string;
 
     @Prop({ type: [String], default: [] }) 

@@ -57,6 +57,10 @@ export class UpdateStudent {
 
     @IsString()
     @IsOptional()
+    stay?: string;
+    
+    @IsString()
+    @IsOptional()
     file?: string;
 
     @IsOptional()

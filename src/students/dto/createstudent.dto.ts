@@ -57,6 +57,10 @@ export class CreateStudent {
 
     @IsString()
     @IsOptional()
+    stay?: string;
+
+    @IsString()
+    @IsOptional()
     file?: string;
 
     @IsOptional()
