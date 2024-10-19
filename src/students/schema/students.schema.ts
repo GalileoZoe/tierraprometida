@@ -3,8 +3,8 @@ import { Document } from "mongoose";
 
 export enum StudentStatus {
     Baja = 'Baja',
-    EnProceso = 'En Proceso',
-    Alta = 'Rehabilitado',
+    Residente = 'Residente',
+    Egresado = 'Egresado',
 }
 
 @Schema()
@@ -61,7 +61,7 @@ export class Students extends Document {
     @Prop()
     enddate?: string;
 
-    @Prop({ default: StudentStatus.EnProceso })
+    @Prop({ default: StudentStatus.Residente })
     status?: StudentStatus;
 }
 
