@@ -11,55 +11,58 @@ export enum StudentStatus {
 export class Students extends Document {
 
     @Prop()
-    name: string;
+    name?: string;
 
     @Prop()
-    lastname: string;
+    lastname?: string;
 
     @Prop()
-    username: string;
+    username?: string;
+
+    @Prop()
+    gender?: string;
     
     @Prop()
-    age: string;
+    age?: string;
 
     @Prop()
-    curp: string;
+    curp?: string;
 
     @Prop()
-    email: string;
+    email?: string;
 
     @Prop()
-    password: string;
+    password?: string;
 
     @Prop()
-    phone: string;
+    phone?: string;
 
     @Prop()
-    address: string;
+    address?: string;
 
     @Prop()
-    drug: string;
+    drug?: string;
 
     @Prop()
-    tutor: string;
+    tutor?: string;
 
     @Prop()
-    file: string;
+    file?: string;
 
     @Prop({ type: [String], default: [] }) 
-    files: string[];
+    files?: string[];
 
     @Prop()
-    description: string;
+    description?: string;
 
     @Prop()
-    startdate: string;
+    startdate?: string;
 
     @Prop()
-    enddate: string;
+    enddate?: string;
 
     @Prop({ default: StudentStatus.EnProceso })
-    status: StudentStatus;
+    status?: StudentStatus;
 }
 
 export const StudentsSchema = SchemaFactory.createForClass(Students);

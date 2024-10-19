@@ -13,58 +13,62 @@ export class CreateStudent {
 
     @IsString()
     @IsOptional()
-    username: string;
+    username?: string;
 
     @IsString()
     @IsOptional()
-    age: string;
+    gender?: string;
 
     @IsString()
     @IsOptional()
-    curp: string;
+    age?: string;
+
+    @IsString()
+    @IsOptional()
+    curp?: string;
 
     @IsEmail()
     @IsOptional()
-    email: string;
+    email?: string;
 
     @IsString()
     @IsOptional()
-    password: string;
+    password?: string;
 
     @IsString()
     @IsOptional()
-    phone: string;
+    phone?: string;
 
     @IsString()
     @IsOptional()
-    address: string;
+    address?: string;
 
     @IsString()
     @IsOptional()
-    drug: string;
+    drug?: string;
 
     @IsString()
     @IsOptional()
-    tutor: string;
+    tutor?: string;
 
     @IsString()
     @IsOptional()
-    file: string;
+    file?: string;
 
     @IsOptional()
     files?: string[];
 
     @IsString()
     @IsOptional()
-    description: string;
+    description?: string;
 
     @IsString()
     @IsOptional()
-    startdate: string;
+    startdate?: string;
 
     @IsString()
     @IsOptional()
-    enddate: string;
+    enddate?: string;
 
     @IsOptional()
     status?: StudentStatus;
