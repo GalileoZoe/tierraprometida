@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsEmail} from 'class-validator';
+import { IsString, IsOptional, IsEmail } from 'class-validator';
 import { StudentStatus } from '../schema/students.schema';
 
 export class UpdateStudent {
@@ -13,7 +13,7 @@ export class UpdateStudent {
 
     @IsString()
     @IsOptional()
-    lastname?: string;Q
+    lastname?: string;
 
     @IsString()
     @IsOptional()
@@ -21,7 +21,11 @@ export class UpdateStudent {
 
     @IsString()
     @IsOptional()
-   gender?: string;
+    gender?: string;
+
+    @IsString()
+    @IsOptional()
+    blood?: string;
 
     @IsString()
     @IsOptional()
@@ -49,7 +53,23 @@ export class UpdateStudent {
 
     @IsString()
     @IsOptional()
+    disease?: string;
+
+    @IsString()
+    @IsOptional()
+    allergy?: string;
+
+    @IsString()
+    @IsOptional()
     drug?: string;
+
+    @IsString()
+    @IsOptional()
+    stigma?: string;
+
+    @IsString()
+    @IsOptional()
+    treatment?: string;
 
     @IsString()
     @IsOptional()
@@ -58,7 +78,7 @@ export class UpdateStudent {
     @IsString()
     @IsOptional()
     stay?: string;
-    
+
     @IsString()
     @IsOptional()
     file?: string;

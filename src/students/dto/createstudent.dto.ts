@@ -25,6 +25,10 @@ export class CreateStudent {
 
     @IsString()
     @IsOptional()
+    blood?: string;
+
+    @IsString()
+    @IsOptional()
     age?: string;
 
     @IsString()
@@ -49,7 +53,24 @@ export class CreateStudent {
 
     @IsString()
     @IsOptional()
+    disease?: string;
+
+    @IsString()
+    @IsOptional()
+    allergy?: string;
+
+
+    @IsString()
+    @IsOptional()
     drug?: string;
+
+    @IsString()
+    @IsOptional()
+    stigma?: string;
+
+    @IsString()
+    @IsOptional()
+    treatment?: string;
 
     @IsString()
     @IsOptional()

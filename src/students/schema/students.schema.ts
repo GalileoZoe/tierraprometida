@@ -24,6 +24,9 @@ export class Students extends Document {
 
     @Prop()
     gender?: string;
+
+    @Prop()
+    blood?: string;
     
     @Prop()
     age?: string;
@@ -44,7 +47,19 @@ export class Students extends Document {
     address?: string;
 
     @Prop()
+    disease?: string;
+
+    @Prop()
+    allergy?: string;
+
+    @Prop()
     drug?: string;
+
+    @Prop()
+    stigma?: string;
+
+    @Prop()
+    treatment?: string;
 
     @Prop()
     tutor?: string;
