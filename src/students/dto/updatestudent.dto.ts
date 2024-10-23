@@ -1,5 +1,28 @@
-import { IsString, IsOptional, IsEmail } from 'class-validator';
+import { IsString, IsOptional, ValidateNested, IsArray } from 'class-validator';
+import { Type } from 'class-transformer';
 import { StudentStatus } from '../schema/students.schema';
+
+class ReportDTO {
+    @IsString()
+    report: string;
+
+    @IsString()
+    autor: string;
+
+    @IsString()
+    date: string;
+}
+
+class FileDTO {
+    @IsString()
+    file: string;
+
+    @IsString()
+    title: string;
+
+    @IsString()
+    date: string;
+}
 
 export class UpdateStudent {
 
@@ -79,12 +102,13 @@ export class UpdateStudent {
     @IsOptional()
     stay?: string;
 
-    @IsString()
-    @IsOptional()
-    file?: string;
+ // Nuevo campo reports
+ @IsArray()
+ @ValidateNested({ each: true })
+ @Type(() => FileDTO)
+ @IsOptional()
+ files?: FileDTO[];
 
-    @IsOptional()
-    files?: string[];
 
     @IsString()
     @IsOptional()
@@ -100,4 +124,11 @@ export class UpdateStudent {
 
     @IsOptional()
     status?: StudentStatus;
+
+    // Nuevo campo reports
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => ReportDTO)
+    @IsOptional()
+    reports?: ReportDTO[];
 }

@@ -1,5 +1,17 @@
-import { IsString, IsOptional, } from 'class-validator';
+import { IsString, IsOptional, ValidateNested, IsArray } from 'class-validator';
+import { Type } from 'class-transformer';
 import { StudentStatus } from '../schema/students.schema';
+
+class ReportDTO {
+    @IsString()
+    report: string;
+
+    @IsString()
+    autor: string;
+
+    @IsString()
+    date: string;
+}
 
 export class CreateStudent {
 
@@ -59,7 +71,6 @@ export class CreateStudent {
     @IsOptional()
     allergy?: string;
 
-
     @IsString()
     @IsOptional()
     drug?: string;
@@ -101,4 +112,11 @@ export class CreateStudent {
 
     @IsOptional()
     status?: StudentStatus;
+
+    // Nuevo campo reports
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => ReportDTO   ) 
+    @IsOptional()
+    reports?: ReportDTO[];
 }
