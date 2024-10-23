@@ -96,18 +96,18 @@ export class UpdateStudent {
 
     @IsString()
     @IsOptional()
-    tutor?: string;
+    tuthor?: string;
 
     @IsString()
     @IsOptional()
     stay?: string;
 
- // Nuevo campo reports
- @IsArray()
- @ValidateNested({ each: true })
- @Type(() => FileDTO)
- @IsOptional()
- files?: FileDTO[];
+    // Nuevo campo reports
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => FileDTO)
+    @IsOptional()
+    files?: FileDTO[];
 
 
     @IsString()

@@ -3,7 +3,7 @@ import { Document, Types } from "mongoose";
 
 export enum StudentStatus {
     Baja = 'Baja',
-    Residente = 'Residente',
+    EnTratamiento = 'En Tratamiento',
     Egresado = 'Egresado',
 }
 
@@ -19,7 +19,20 @@ export class Report {
     date: string;
 }
 
+@Schema()
+export class File {
+    @Prop()
+    file: string;
+
+    @Prop()
+    title: string;
+
+    @Prop()
+    date: string;
+}
+
 const ReportSchema = SchemaFactory.createForClass(Report);
+const FileSchema = SchemaFactory.createForClass(File);
 
 @Schema()
 export class Students extends Document {
@@ -84,8 +97,8 @@ export class Students extends Document {
     @Prop()
     file?: string;
 
-    @Prop({ type: [String], default: [] }) 
-    files?: string[];
+    @Prop({ type: [FileSchema], default: [] })
+    files?: File[];;
 
     @Prop()
     description?: string;
@@ -96,7 +109,7 @@ export class Students extends Document {
     @Prop()
     enddate?: string;
 
-    @Prop({ default: StudentStatus.Residente })
+    @Prop({ default: StudentStatus.EnTratamiento })
     status?: StudentStatus;
 
     @Prop({ type: [ReportSchema], default: [] })

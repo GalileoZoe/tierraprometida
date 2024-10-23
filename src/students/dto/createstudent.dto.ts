@@ -13,19 +13,30 @@ class ReportDTO {
     date: string;
 }
 
+class FileDTO {
+    @IsString()
+    file: string;
+
+    @IsString()
+    title: string;
+
+    @IsString()
+    date: string;
+}
+
 export class CreateStudent {
 
     @IsString()
     @IsOptional()
-    number: string;
+    number?: string;
 
     @IsString()
     @IsOptional()
-    name: string;
+    name?: string;
 
     @IsString()
     @IsOptional()
-    lastname: string;
+    lastname?: string;
 
     @IsString()
     @IsOptional()
@@ -85,18 +96,19 @@ export class CreateStudent {
 
     @IsString()
     @IsOptional()
-    tutor?: string;
+    tuthor?: string;
 
     @IsString()
     @IsOptional()
     stay?: string;
 
-    @IsString()
+    // Nuevo campo reports
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => FileDTO)
     @IsOptional()
-    file?: string;
+    files?: FileDTO[];
 
-    @IsOptional()
-    files?: string[];
 
     @IsString()
     @IsOptional()
@@ -116,7 +128,7 @@ export class CreateStudent {
     // Nuevo campo reports
     @IsArray()
     @ValidateNested({ each: true })
-    @Type(() => ReportDTO   ) 
+    @Type(() => ReportDTO)
     @IsOptional()
     reports?: ReportDTO[];
 }
