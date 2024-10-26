@@ -16,7 +16,6 @@ export class Login extends Document {
     @Prop()
     image?: string;
 
-    // Campo de fecha con el timestamp actual
     @Prop({ type: Date, default: Date.now })
     update: Date;
 
