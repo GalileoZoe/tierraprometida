@@ -17,7 +17,7 @@ export class Login extends Document {
     image?: string;
 
     @Prop({ type: Date, default: Date.now })
-    update: Date;
+    update?: Date;
 
 }
 
