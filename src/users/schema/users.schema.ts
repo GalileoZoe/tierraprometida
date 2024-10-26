@@ -1,10 +1,17 @@
 import { Schema, Prop, SchemaFactory } from "@nestjs/mongoose";
-import { Document } from "mongoose";
+import { Document, Types } from "mongoose";
 
-export enum StudentStatus {
+export enum UserStatus {
     Baja = 'Baja',
-    EnTratamiento = 'En Tratamiento',
+    Activo = 'Activo',
     Egresado = 'Egresado',
+}
+
+export enum UserRol {
+    Usuario = 'Usuario',
+    SuperUsuario = 'SuperUsuario',
+    Administrador = 'Administrador',
+    Psicólogo = 'Psicólogo',
 }
 
 @Schema()
@@ -35,7 +42,7 @@ const ReportSchema = SchemaFactory.createForClass(Report);
 const FileSchema = SchemaFactory.createForClass(File);
 
 @Schema()
-export class Students extends Document {
+export class Users extends Document {
 
     @Prop()
     number?: string;
@@ -109,11 +116,14 @@ export class Students extends Document {
     @Prop()
     enddate?: string;
 
-    @Prop({ default: StudentStatus.EnTratamiento })
-    status?: StudentStatus;
+    @Prop({ default: UserStatus.Activo })
+    status?: UserStatus;
+
+    @Prop({ default: UserRol.Usuario })
+    rol?: UserRol;
 
     @Prop({ type: [ReportSchema], default: [] })
     reports?: Report[];
 }
 
-export const StudentsSchema = SchemaFactory.createForClass(Students);
+export const UsersSchema = SchemaFactory.createForClass(Users);
