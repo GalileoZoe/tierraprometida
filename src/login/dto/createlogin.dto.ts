@@ -6,6 +6,11 @@ import {
 
 export class CreateLogin {
 
+    
+    @IsString()
+    @IsOptional()
+    image?: string;
+
     @IsString()
     @IsOptional()
     username?: string;
@@ -20,7 +25,7 @@ export class CreateLogin {
 
     @IsString()
     @IsOptional()
-    image?: string;
+    rol?: string;
 
     @IsOptional()
     @IsDateString()

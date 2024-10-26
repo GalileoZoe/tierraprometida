@@ -5,6 +5,10 @@ import {
 } from "class-validator";
 
 export class UpdateLogin {
+    
+    @IsString()
+    @IsOptional()
+    image?: string;
 
     @IsString()
     @IsOptional()
@@ -20,7 +24,7 @@ export class UpdateLogin {
 
     @IsString()
     @IsOptional()
-    image?: string;
+    rol?: string;
 
     @IsOptional()
     @IsDateString()

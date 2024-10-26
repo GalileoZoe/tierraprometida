@@ -5,6 +5,9 @@ import { Document } from "mongoose";
 export class Login extends Document {
 
     @Prop()
+    image?: string;
+
+    @Prop()
     username?: string;
     
     @Prop()
@@ -14,7 +17,7 @@ export class Login extends Document {
     password?: string;
 
     @Prop()
-    image?: string;
+    rol?: string;
 
     @Prop({ type: Date, default: Date.now })
     update?: Date;
