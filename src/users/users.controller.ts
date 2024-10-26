@@ -1,7 +1,7 @@
 import { Post, Body, ValidationPipe, Put, Delete, Get, Param } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUser } from './dto/Createuser.dto';
+import { CreateUser } from './dto/createuser.dto';
 import { UpdateUser } from './dto/updateuser.dto';
 
 @Controller('users')
