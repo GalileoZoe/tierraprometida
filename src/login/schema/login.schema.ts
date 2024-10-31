@@ -5,7 +5,7 @@ import { Document } from "mongoose";
 export class Login extends Document {
 
     @Prop()
-    image?: string;
+    photo?: string;
 
     @Prop()
     username?: string;

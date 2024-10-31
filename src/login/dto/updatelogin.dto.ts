@@ -8,7 +8,7 @@ export class UpdateLogin {
     
     @IsString()
     @IsOptional()
-    image?: string;
+    photo?: string;
 
     @IsString()
     @IsOptional()

@@ -9,7 +9,7 @@ export class CreateLogin {
     
     @IsString()
     @IsOptional()
-    image?: string;
+    photo?: string;
 
     @IsString()
     @IsOptional()
