@@ -7,10 +7,10 @@ export class Login extends Document {
     @Prop()
     photo?: string;
 
-    @Prop()
+    @Prop({unique:true})
     username?: string;
     
-    @Prop()
+    @Prop({unique:true})
     email?: string;
 
     @Prop()

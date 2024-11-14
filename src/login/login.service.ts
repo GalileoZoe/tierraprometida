@@ -57,4 +57,6 @@ export class LoginService {
     async delete(id_user: string) {
         return await this.loginModel.findByIdAndDelete(id_user);
     }
+
+    
 }

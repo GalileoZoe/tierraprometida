@@ -1,28 +1,25 @@
 import { Schema, Prop, SchemaFactory } from "@nestjs/mongoose";
-import { Document } from "mongoose";
+import { Document, Types } from "mongoose";
+import { StudentStatus, FileSchema } from "src/students/schema/students.schema";
 
-export enum StudentStatus {
-    Baja = 'Baja',
-    EnTratamiento = 'En Tratamiento',
-    Egresado = 'Egresado',
-}
+
 
 @Schema()
-export class File {
-    @Prop()
-    file: string;
+export class Reports extends Document {
+    @Prop({ required: true, type: Types.ObjectId, ref: 'Students' })
+    idstudent: Types.ObjectId;  // Referencia al producto para identificar el producto vendido
 
     @Prop()
-    title: string;
+    author?: string;
 
     @Prop()
-    date: string;
-}
+    title?: string;
 
-export const FileSchema = SchemaFactory.createForClass(File);
+    @Prop()
+    reports?: string;
 
-@Schema()
-export class Students extends Document {
+    @Prop()
+    date?: string;
 
     @Prop()
     number?: string;
@@ -96,9 +93,9 @@ export class Students extends Document {
     @Prop()
     enddate?: string;
 
-    @Prop({ default: StudentStatus.EnTratamiento })
+    @Prop({ default: StudentStatus })
     status?: StudentStatus;
 
 }
 
-export const StudentsSchema = SchemaFactory.createForClass(Students);
+export const ReportsSchema = SchemaFactory.createForClass(Reports);
