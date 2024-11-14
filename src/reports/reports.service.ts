@@ -1,7 +1,7 @@
 // reports.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Reports } from './schema/reports.schema';
 import { CreateReport } from './dto/createreport.dto';
 import { UpdateReport } from './dto/updatereport.dto';
@@ -12,13 +12,18 @@ export class ReportsService {
         @InjectModel(Reports.name) private reportsModel: Model<Reports>,
     ) {}
 
-    // Método para registrar un nuevo reporte con un argumento adicional opcional
-    async registerReport(createReport: CreateReport, additionalArg?: string): Promise<Reports> {
+     // Método para registrar un nuevo reporte
+     async registerReport(createReport: CreateReport, additionalArg?: string): Promise<Reports> {
         const newReport = new this.reportsModel({
             ...createReport,
-            additionalField: additionalArg, // Agregar algún campo adicional si es necesario
+            additionalField: additionalArg,
         });
         return newReport.save();
+    }
+
+    // Obtener todos los reportes con solo el campo `idstudent` del estudiante
+    async findAllStudentIds(): Promise<{ idstudent: Types.ObjectId }[]> {
+        return this.reportsModel.find().select('idstudent').exec();
     }
 
     // Actualizar un reporte existente por ID

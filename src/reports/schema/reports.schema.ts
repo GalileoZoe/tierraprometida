@@ -5,8 +5,9 @@ import { StudentStatus, FileSchema } from "src/students/schema/students.schema";
 
 @Schema()
 export class Reports extends Document {
-    @Prop({ required: true, type: Types.ObjectId, ref: 'Students' })
-    idstudent: Types.ObjectId;  // Referencia al estudiante para asociar el reporte
+    @Prop({ type: Types.ObjectId, ref: 'Students' })
+    idstudent: Types.ObjectId;
+
 
     @Prop()
     author?: string;
