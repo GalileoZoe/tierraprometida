@@ -1,3 +1,4 @@
+// reports.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -12,10 +13,10 @@ export class ReportsService {
     ) {}
 
     // Método para registrar un nuevo reporte con un argumento adicional opcional
-    async registerReport(createReport: CreateReport, additionalArg: string): Promise<Reports> {
+    async registerReport(createReport: CreateReport, additionalArg?: string): Promise<Reports> {
         const newReport = new this.reportsModel({
             ...createReport,
-            additionalField: additionalArg, // Puedes agregar un campo adicional si es necesario
+            additionalField: additionalArg, // Agregar algún campo adicional si es necesario
         });
         return newReport.save();
     }
@@ -29,14 +30,14 @@ export class ReportsService {
         return updatedReport;
     }
 
-    // Obtener todos los reportes
+    // Obtener todos los reportes con la información del estudiante
     async findAll(): Promise<Reports[]> {
-        return this.reportsModel.find().exec();
+        return this.reportsModel.find().populate('idstudent').exec();
     }
 
-    // Obtener un reporte específico por ID
+    // Obtener un reporte específico por ID con la información del estudiante
     async findOne(id: string): Promise<Reports> {
-        const report = await this.reportsModel.findById(id).exec();
+        const report = await this.reportsModel.findById(id).populate('idstudent').exec();
         if (!report) {
             throw new NotFoundException(`Reporte con ID ${id} no encontrado`);
         }

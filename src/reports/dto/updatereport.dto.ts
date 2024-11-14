@@ -15,6 +15,9 @@ class FileDTO {
 }
 
 export class UpdateReport {
+    
+    @IsString()
+    idstudent?: string;
 
     @IsString()
     @IsOptional()

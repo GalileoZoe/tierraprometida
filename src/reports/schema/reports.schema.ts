@@ -3,11 +3,10 @@ import { Document, Types } from "mongoose";
 import { StudentStatus, FileSchema } from "src/students/schema/students.schema";
 
 
-
 @Schema()
 export class Reports extends Document {
     @Prop({ required: true, type: Types.ObjectId, ref: 'Students' })
-    idstudent: Types.ObjectId;  // Referencia al producto para identificar el producto vendido
+    idstudent: Types.ObjectId;  // Referencia al estudiante para asociar el reporte
 
     @Prop()
     author?: string;
@@ -93,7 +92,7 @@ export class Reports extends Document {
     @Prop()
     enddate?: string;
 
-    @Prop({ default: StudentStatus })
+    @Prop()
     status?: StudentStatus;
 
 }

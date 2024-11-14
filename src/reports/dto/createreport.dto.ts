@@ -17,6 +17,9 @@ class FileDTO {
 export class CreateReport {
 
     @IsString()
+    idstudent?: string;
+
+    @IsString()
     @IsOptional()
     author?: string;
 
