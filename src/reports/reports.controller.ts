@@ -38,7 +38,7 @@ export class ReportsController {
   /**
    * Obtener todos los reportes de un estudiante específico
    */
-  @Get('students/reports/:studentId')
+  @Get('students/:studentId')
   async findByStudent(@Param('studentId') studentId: string) {
     return this.reportsService.findByStudent(studentId);
   }
