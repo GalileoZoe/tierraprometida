@@ -1,7 +1,6 @@
 import {
   Injectable,
   NotFoundException,
-  BadRequestException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -21,13 +20,11 @@ export class ReportsService {
    * Crear un nuevo reporte para un estudiante
    */
   async create(createReport: CreateReport, studentId: string): Promise<Reports> {
-    // Validar que el estudiante exista
     const student = await this.studentsService.findOne(studentId);
     if (!student) {
       throw new NotFoundException(`Estudiante con ID ${studentId} no encontrado`);
     }
 
-    // Crear el reporte y asociarlo al estudiante
     const newReport = new this.reportsModel({
       ...createReport,
       idstudent: studentId,
@@ -62,25 +59,15 @@ export class ReportsService {
    * Obtener todos los reportes de un estudiante específico
    */
   async findByStudent(studentId: string): Promise<Reports[]> {
-    // Verificar que el estudiante exista
     const student = await this.studentsService.findOne(studentId);
     if (!student) {
       throw new NotFoundException(`Estudiante con ID ${studentId} no encontrado`);
     }
 
-    // Obtener reportes asociados al estudiante
-    const reports = await this.reportsModel
+    return this.reportsModel
       .find({ idstudent: studentId })
       .populate('idstudent')
       .exec();
-
-    if (!reports.length) {
-      throw new NotFoundException(
-        `No se encontraron reportes para el estudiante con ID ${studentId}`,
-      );
-    }
-
-    return reports;
   }
 
   /**
