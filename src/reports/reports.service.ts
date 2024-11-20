@@ -1,6 +1,10 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
+import { Model } from 'mongoose';
 import { Reports } from './schema/reports.schema';
 import { CreateReport } from './dto/createreport.dto';
 import { UpdateReport } from './dto/updatereport.dto';
@@ -10,63 +14,97 @@ import { StudentsService } from 'src/students/students.service';
 export class ReportsService {
   constructor(
     @InjectModel(Reports.name) private readonly reportsModel: Model<Reports>,
-    private readonly studentsService: StudentsService,  // Inyectamos el servicio de Students
+    private readonly studentsService: StudentsService,
   ) {}
 
-  // Registrar un nuevo reporte para un estudiante específico
-  async registerReport(createReport: CreateReport, studentId: string): Promise<Reports> {
-    // Verificamos que el estudiante exista antes de crear el reporte
-    const studentExists = await this.studentsService.findOne(studentId);
-    if (!studentExists) {
+  /**
+   * Crear un nuevo reporte para un estudiante
+   */
+  async create(createReport: CreateReport, studentId: string): Promise<Reports> {
+    // Validar que el estudiante exista
+    const student = await this.studentsService.findOne(studentId);
+    if (!student) {
       throw new NotFoundException(`Estudiante con ID ${studentId} no encontrado`);
     }
 
+    // Crear el reporte y asociarlo al estudiante
     const newReport = new this.reportsModel({
       ...createReport,
-      idstudent: studentId, // Asociamos el reporte con el estudiante
+      idstudent: studentId,
     });
 
-    // Guardamos y devolvemos el reporte
     return newReport.save();
   }
 
-  // Obtener todos los reportes, incluyendo el ID del estudiante asociado
+  /**
+   * Obtener todos los reportes
+   */
   async findAll(): Promise<Reports[]> {
     return this.reportsModel.find().populate('idstudent').exec();
   }
 
-  // Obtener un reporte específico por ID, incluyendo los datos del estudiante
-  async findOne(id: string): Promise<Reports> {
-    const report = await this.reportsModel.findById(id).populate('idstudent').exec();
+  /**
+   * Obtener un reporte por ID
+   */
+  async findOne(reportId: string): Promise<Reports> {
+    const report = await this.reportsModel
+      .findById(reportId)
+      .populate('idstudent')
+      .exec();
+
     if (!report) {
-      throw new NotFoundException(`Reporte con ID ${id} no encontrado`);
+      throw new NotFoundException(`Reporte con ID ${reportId} no encontrado`);
     }
     return report;
   }
 
-  // Actualizar un reporte existente
-  async update(id: string, updateReport: UpdateReport): Promise<Reports> {
-    const updatedReport = await this.reportsModel.findByIdAndUpdate(id, updateReport, { new: true });
-    if (!updatedReport) {
-      throw new NotFoundException(`Reporte con ID ${id} no encontrado`);
+  /**
+   * Obtener todos los reportes de un estudiante específico
+   */
+  async findByStudent(studentId: string): Promise<Reports[]> {
+    // Verificar que el estudiante exista
+    const student = await this.studentsService.findOne(studentId);
+    if (!student) {
+      throw new NotFoundException(`Estudiante con ID ${studentId} no encontrado`);
     }
+
+    // Obtener reportes asociados al estudiante
+    const reports = await this.reportsModel
+      .find({ idstudent: studentId })
+      .populate('idstudent')
+      .exec();
+
+    if (!reports.length) {
+      throw new NotFoundException(
+        `No se encontraron reportes para el estudiante con ID ${studentId}`,
+      );
+    }
+
+    return reports;
+  }
+
+  /**
+   * Actualizar un reporte por ID
+   */
+  async update(reportId: string, updateReport: UpdateReport): Promise<Reports> {
+    const updatedReport = await this.reportsModel
+      .findByIdAndUpdate(reportId, updateReport, { new: true })
+      .exec();
+
+    if (!updatedReport) {
+      throw new NotFoundException(`Reporte con ID ${reportId} no encontrado`);
+    }
+
     return updatedReport;
   }
 
-  // Eliminar un reporte
-  async delete(id: string): Promise<void> {
-    const result = await this.reportsModel.findByIdAndDelete(id).exec();
-    if (!result) {
-      throw new NotFoundException(`Reporte con ID ${id} no encontrado`);
+  /**
+   * Eliminar un reporte por ID
+   */
+  async delete(reportId: string): Promise<void> {
+    const deletedReport = await this.reportsModel.findByIdAndDelete(reportId).exec();
+    if (!deletedReport) {
+      throw new NotFoundException(`Reporte con ID ${reportId} no encontrado`);
     }
-  }
-
-  // Obtener reportes por ID de estudiante
-  async findReportsByStudentId(studentId: string): Promise<Reports[]> {
-    const reports = await this.reportsModel.find({ idstudent: studentId }).exec();
-    if (!reports || reports.length === 0) {
-      throw new NotFoundException(`No se encontraron reportes para el estudiante con ID ${studentId}`);
-    }
-    return reports;
   }
 }

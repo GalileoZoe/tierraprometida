@@ -2,12 +2,11 @@ import { Schema, Prop, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Types } from "mongoose";
 import { StudentStatus, FileSchema } from "src/students/schema/students.schema";
 
-
 @Schema()
 export class Reports extends Document {
-    @Prop({ type: Types.ObjectId, ref: 'Students' })
-    idstudent: Types.ObjectId;
-
+  
+    @Prop({ type: Types.ObjectId, ref: 'Students', required: true })
+    idstudent: Types.ObjectId; // Asociado al estudiante con referencia a la colección 'Students'
 
     @Prop()
     author?: string;
@@ -38,7 +37,7 @@ export class Reports extends Document {
 
     @Prop()
     blood?: string;
-    
+
     @Prop()
     age?: string;
 
@@ -82,7 +81,7 @@ export class Reports extends Document {
     file?: string;
 
     @Prop({ type: [FileSchema], default: [] })
-    files?: File[];;
+    files?: File[];
 
     @Prop()
     description?: string;
@@ -95,7 +94,6 @@ export class Reports extends Document {
 
     @Prop()
     status?: StudentStatus;
-
 }
 
 export const ReportsSchema = SchemaFactory.createForClass(Reports);
