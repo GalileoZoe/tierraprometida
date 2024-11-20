@@ -1,60 +1,37 @@
-import {
-    Controller,
-    Get,
-    Post,
-    Put,
-    Delete,
-    Param,
-    Body,
-    ValidationPipe,
-    NotFoundException,
-  } from '@nestjs/common';
-import { CreateReport } from 'src/reports/dto/createreport.dto';
-import { UpdateReport } from 'src/reports/dto/updatereport.dto';
-import { ReportsService } from './students.service';
+import { Post, Body, ValidationPipe, Put, Delete, Get, Param } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
+import { StudentsService } from './students.service';
+import { CreateStudent } from './dto/createstudent.dto';
+import { UpdateStudent } from './dto/updatestudent.dto';
 
-  
-  @Controller('reports')
-  export class ReportsController {
-    constructor(private readonly reportsService: ReportsService) {}
-  
-    @Post(':studentId')
-    async create(
-      @Param('studentId') studentId: string,
-      @Body(new ValidationPipe()) createReport: CreateReport,
-    ) {
-      return this.reportsService.create(createReport, studentId);
+@Controller('students')
+export class StudentsController {
+
+    constructor( private studentsService: StudentsService ){}
+
+    @Post()
+    async create( @Body( new ValidationPipe() ) createdStudent: CreateStudent ){
+        return this.studentsService.create( createdStudent );
     }
-  
+
+    @Put(':id')
+    async update( @Param('id') id: string, @Body( new ValidationPipe() ) updateStudent: UpdateStudent ){
+        return this.studentsService.update(id, updateStudent);
+    }
+
     @Get()
-    async findAll() {
-      return this.reportsService.findAll();
+    async findAll(){
+        return this.studentsService.findAll();
     }
-  
-    @Get(':reportId')
-    async findOne(@Param('reportId') reportId: string) {
-      return this.reportsService.findOne(reportId);
+
+    @Get(':id')
+    async findOne( @Param('id') id: string ){
+        return this.studentsService.findOne( id );
     }
-  
-    /**
-     * Obtener todos los reportes de un estudiante específico
-     */
-    @Get('students/reports/:studentId')
-    async findByStudent(@Param('studentId') studentId: string) {
-      return this.reportsService.findByStudent(studentId);
+
+    @Delete(':id')
+    async delete( @Param('id') id: string ){
+        return this.studentsService.delete( id );
     }
-  
-    @Put(':reportId')
-    async update(
-      @Param('reportId') reportId: string,
-      @Body(new ValidationPipe()) updateReport: UpdateReport,
-    ) {
-      return this.reportsService.update(reportId, updateReport);
-    }
-  
-    @Delete(':reportId')
-    async delete(@Param('reportId') reportId: string) {
-      return this.reportsService.delete(reportId);
-    }
-  }
-  
+
+}
