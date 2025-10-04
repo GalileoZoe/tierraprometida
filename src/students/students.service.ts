@@ -26,8 +26,8 @@ export class StudentsService {
   async update(id: string, student: UpdateStudent): Promise<Students> {
     try {
       const updatedStudent = await this.studentModel.findByIdAndUpdate(id, student, {
-        new: true, // Devuelve el documento actualizado
-        runValidators: true, // Aplica validaciones definidas en el esquema
+        new: true,
+        runValidators: true,
       }).exec();
 
       if (!updatedStudent) {
@@ -44,7 +44,7 @@ export class StudentsService {
   async findOne(id: string): Promise<Students> {
     try {
       const student = await this.studentModel.findById(id).exec();
-      if (!student) {
+      if (!student || student.softdelete) {
         throw new NotFoundException(`Estudiante con ID ${id} no encontrado`);
       }
       return student;
@@ -54,17 +54,55 @@ export class StudentsService {
     }
   }
 
-  // Obtener todos los estudiantes
+  // Obtener todos los estudiantes activos
   async findAll(): Promise<Students[]> {
     try {
-      return await this.studentModel.find().exec();
+      return await this.studentModel.find({ softdelete: false }).exec();
     } catch (error) {
       console.error('Error al obtener estudiantes:', error.message);
       throw new BadRequestException('Error al obtener los estudiantes.');
     }
   }
 
-  // Eliminar un estudiante por ID
+  // Soft delete de un estudiante
+  async softDelete(id: string): Promise<Students> {
+    try {
+      const student = await this.studentModel.findByIdAndUpdate(
+        id,
+        { softdelete: true },
+        { new: true }
+      ).exec();
+
+      if (!student) {
+        throw new NotFoundException(`Estudiante con ID ${id} no encontrado`);
+      }
+      return student;
+    } catch (error) {
+      console.error('Error al eliminar estudiante (soft):', error.message);
+      throw new BadRequestException('Error al eliminar el estudiante.');
+    }
+  }
+
+  // Restaurar estudiante eliminado
+  async restore(id: string): Promise<Students> {
+    try {
+      const student = await this.studentModel.findByIdAndUpdate(
+        id,
+        { softdelete: false },
+        { new: true }
+      ).exec();
+
+      if (!student) {
+        throw new NotFoundException(`Estudiante con ID ${id} no encontrado`);
+      }
+      return student;
+    } catch (error) {
+      console.error('Error al restaurar estudiante:', error.message);
+      throw new BadRequestException('Error al restaurar el estudiante.');
+    }
+  }
+
+  // Eliminar permanentemente un estudiante
   async delete(id: string): Promise<void> {
     try {
       const deletedStudent = await this.studentModel.findByIdAndDelete(id).exec();
@@ -77,10 +115,10 @@ export class StudentsService {
     }
   }
 
-  // Buscar estudiantes por campos específicos
+  // Buscar estudiantes por campos específicos (solo activos)
   async findByField(field: string, value: string): Promise<Students[]> {
     try {
-      const query = { [field]: value };
+      const query = { [field]: value, softdelete: false };
       return await this.studentModel.find(query).exec();
     } catch (error) {
       console.error('Error al buscar estudiantes:', error.message);

@@ -10,7 +10,7 @@ import * as bcrypt from 'bcrypt';
 export class LoginService {
 
     constructor(
-        @InjectModel(Login.name) // Cambiado para MongoDB con Mongoose
+        @InjectModel(Login.name)
         private loginModel: Model<Login>
     ){}
 

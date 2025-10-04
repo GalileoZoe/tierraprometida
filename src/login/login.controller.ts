@@ -39,7 +39,9 @@ import { UpdateLogin } from './dto/updatelogin.dto';
             return await this.loginService.update(id_user, updateLogin);
         }
     
-        @Get('list')
+      
+    
+        @Get('')
         async findAll() {
             return await this.loginService.findAll();
         }

@@ -10,6 +10,6 @@ import { Students, StudentsSchema } from './schema/students.schema';
   ],
   controllers: [StudentsController],
   providers: [StudentsService],
-  exports: [StudentsService, MongooseModule.forFeature([{ name: Students.name, schema: StudentsSchema }])],
+  exports: [StudentsService], // solo el service
 })
 export class StudentsModule {}

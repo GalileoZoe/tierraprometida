@@ -1,4 +1,5 @@
 import { Schema, Prop, SchemaFactory } from "@nestjs/mongoose";
+import { Types } from "mongoose";
 import { Document } from "mongoose";
 
 export enum StudentStatus {
@@ -85,7 +86,7 @@ export class Students extends Document {
     file?: string;
 
     @Prop({ type: [FileSchema], default: [] })
-    files?: File[];;
+    files?: File[];
 
     @Prop()
     description?: string;
@@ -96,9 +97,46 @@ export class Students extends Document {
     @Prop()
     enddate?: string;
 
+    @Prop()
+    service?: string;
+
+    @Prop()
+    experience?: string;
+
+    @Prop()
+    psychology?: string;
+
+    @Prop()
+    sessions?: string;
+
+    @Prop()
+    check?: number;
+
+    @Prop()
+    medicine: string;
+
     @Prop({ default: StudentStatus.EnTratamiento })
     status?: StudentStatus;
 
+    @Prop({ type: [{ type: Types.ObjectId, ref: 'Payment' }] })
+    payments?: Types.ObjectId[];
+
+    // ✅ Campo para Soft Delete
+    @Prop({ default: false })
+    softdelete?: boolean;
+
+    // ✅ Timestamps automáticos (creado y actualizado)
+    @Prop({ default: Date.now })
+    createdAt?: Date;
+
+    @Prop({ default: Date.now })
+    updatedAt?: Date;
 }
 
 export const StudentsSchema = SchemaFactory.createForClass(Students);
+
+// 🔹 Middleware para actualizar updatedAt en cada save
+StudentsSchema.pre('save', function (next) {
+    this.updatedAt = new Date();
+    next();
+});

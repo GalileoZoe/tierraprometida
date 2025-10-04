@@ -14,11 +14,12 @@ async function bootstrap() {
 
   // Habilitar CORS para permitir solicitudes desde otros orígenes
   
-  // {
-  //   origin: 'http://localhost:3001',  // Reemplazar con el dominio de tu frontend si es necesario
-  //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  //   credentials: true  // Si necesitas permitir el envío de cookies
-  // }
+app.enableCors({
+  origin: 'http://localhost:3001', // dominio de tu frontend
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,               // si necesitas enviar cookies
+});
+
 
   app.enableCors();
   await app.listen(3000);
