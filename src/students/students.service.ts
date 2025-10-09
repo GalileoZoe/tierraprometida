@@ -125,4 +125,9 @@ export class StudentsService {
       throw new BadRequestException('Error al buscar estudiantes por campo.');
     }
   }
+
+  async findByEmail(email: string) {
+    return await this.studentModel.findOne({ email });
+}
+
 }

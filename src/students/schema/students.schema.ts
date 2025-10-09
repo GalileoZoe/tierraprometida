@@ -91,8 +91,8 @@ export class Students extends Document {
     @Prop()
     description?: string;
 
-    @Prop()
-    startdate?: string;
+    @Prop({default : Date.now})
+    startdate?: Date ;
 
     @Prop()
     enddate?: string;

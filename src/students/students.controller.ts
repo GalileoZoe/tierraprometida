@@ -41,6 +41,12 @@ export class StudentsController {
         return this.studentsService.findOne(id);
     }
 
+    @Get('findByEmail/:email')
+    async findByEmail(@Param('email') email: string) {
+    return await this.studentsService.findByEmail(email);
+    }
+
+
     @Delete(':id')
     async delete(@Param('id') id: string) {
         return this.studentsService.delete(id);

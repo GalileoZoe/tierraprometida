@@ -6,6 +6,10 @@ export class CreatePayment {
   @IsOptional()
   student?: Types.ObjectId; // Relación con Students, opcional para pruebas
 
+  @IsString()
+  @IsOptional()
+  concept?: string;
+
   @IsNumber()
   @IsOptional()
   amount?: number;
@@ -21,26 +25,4 @@ export class CreatePayment {
   @IsBoolean()
   @IsOptional()
   softdelete?: boolean; // true = eliminado, false = activo
-}
-
-// DTO para actualizar un Payment
-export class UpdatePaymentDTO {
-  @IsOptional()
-  student?: Types.ObjectId;
-
-  @IsNumber()
-  @IsOptional()
-  amount?: number;
-
-  @IsString()
-  @IsOptional()
-  method?: string;
-
-  @IsEnum(PaymentStatus)
-  @IsOptional()
-  status?: PaymentStatus;
-
-  @IsBoolean()
-  @IsOptional()
-  softdelete?: boolean;
 }

@@ -6,6 +6,10 @@ export class UpdatePayment {
   @IsOptional()
   student?: Types.ObjectId; // Relación con Students
 
+  @IsString()
+  @IsOptional()
+  concept?: string;
+
   @IsNumber()
   @IsOptional()
   amount?: number;

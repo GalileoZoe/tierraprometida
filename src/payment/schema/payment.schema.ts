@@ -11,10 +11,14 @@ export enum PaymentStatus {
 
 @Schema({ timestamps: true })
 export class Payment {
-  @Prop({ required: true })
+
+  @Prop()
+  concept: string;
+
+  @Prop()
   amount: number;
 
-  @Prop({ required: true })
+  @Prop()
   method: string;
 
   @Prop({ enum: PaymentStatus, default: PaymentStatus.Pending })
@@ -25,6 +29,19 @@ export class Payment {
 
   @Prop({ type: Date, default: null }) // <--- aquí está el soft delete
   deletedAt: Date | null;
+
+  // --- NUEVO ---
+  @Prop({ default: false })
+  isScheduled: boolean;
+
+  @Prop({ type: String, enum: ['daily', 'weekly', 'friday', 'saturday'], required: false })
+  frequency?: string;
+
+  @Prop({ type: Date, required: false })
+  dueDate?: Date;
+
+  @Prop({ type: Date, required: false })
+  startDate?: Date;
 }
 
 export const PaymentSchema = SchemaFactory.createForClass(Payment);

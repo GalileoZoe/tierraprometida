@@ -23,9 +23,9 @@ export class PaymentController {
     return this.paymentService.update(id, updatePayment);
   }
 
-  @Patch('complete/student/:studentId')
-  async completePayment(@Param('studentId') studentId: string): Promise<Payment> {
-    return this.paymentService.markStudentPaymentAsCompleted(studentId);
+  @Patch('complete/:id')
+  async completePayment(@Param('id') id: string): Promise<Payment> {
+    return this.paymentService.markPaymentAsCompleted(id);
   }
 
   @Get()
@@ -46,5 +46,26 @@ export class PaymentController {
   @Patch('restore/:id')
   async restore(@Param('id') id: string): Promise<Payment> {
     return this.paymentService.restore(id);
+  }
+
+  // --- NUEVOS ENDPOINTS PROGRAMADOS ---
+  @Post('scheduled')
+  async createScheduled(@Body(new ValidationPipe()) createPayment: CreatePayment): Promise<Payment> {
+    return this.paymentService.createScheduled(createPayment);
+  }
+
+  @Get('scheduled')
+  async findScheduled(): Promise<Payment[]> {
+    return this.paymentService.findScheduled();
+  }
+
+  @Delete('scheduled/:id')
+  async deleteScheduled(@Param('id') id: string): Promise<Payment> {
+    return this.paymentService.deleteScheduled(id);
+  }
+
+  @Patch('scheduled/complete/:id')
+  async completeScheduled(@Param('id') id: string): Promise<Payment> {
+    return this.paymentService.completeScheduled(id);
   }
 }

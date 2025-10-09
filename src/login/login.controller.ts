@@ -50,6 +50,8 @@ import { UpdateLogin } from './dto/updatelogin.dto';
         async findOne(@Param('id_user') id_user: string) {
             return await this.loginService.findOne(id_user);
         }
+
+
     
         // Perfil actualizado también con PUT
         @Put('update/:id')  // Cambié de POST a PUT

@@ -13,12 +13,11 @@ export class PaymentService {
     @InjectModel(Students.name) private readonly studentModel: Model<Students>,
   ) {}
 
-  // Crear un pago
+  // Crear un pago normal o programado
   async create(paymentData: CreatePayment): Promise<Payment> {
     const payment = new this.paymentModel(paymentData);
     const savedPayment = await payment.save();
 
-    // Si se pasa un student, agregar el pago al arreglo payments
     if (paymentData.student) {
       const student = await this.studentModel.findById(paymentData.student).exec();
       if (!student) throw new NotFoundException('Student no encontrado');
@@ -29,12 +28,46 @@ export class PaymentService {
     return savedPayment;
   }
 
-  // Obtener todos los pagos activos
-  async findAll(): Promise<Payment[]> {
-    return this.paymentModel.find({ deletedAt: null }).exec();
+  // Crear pago programado
+  async createScheduled(paymentData: CreatePayment): Promise<Payment> {
+    const scheduled = new this.paymentModel({
+      ...paymentData,
+      isScheduled: true,
+    });
+    return scheduled.save();
   }
 
-  // Obtener un pago por ID
+  // Obtener pagos programados
+  async findScheduled(): Promise<Payment[]> {
+    return this.paymentModel.find({ isScheduled: true, deletedAt: null }).exec();
+  }
+
+  // Eliminar pago programado
+  async deleteScheduled(id: string): Promise<Payment> {
+    if (!Types.ObjectId.isValid(id)) throw new BadRequestException('ID no válido');
+    const payment = await this.paymentModel.findOneAndUpdate(
+      { _id: id, isScheduled: true, deletedAt: null },
+      { deletedAt: new Date() },
+      { new: true }
+    ).exec();
+    if (!payment) throw new NotFoundException(`Pago programado con ID ${id} no encontrado`);
+    return payment;
+  }
+
+  // Completar pago programado
+  async completeScheduled(id: string): Promise<Payment> {
+    if (!Types.ObjectId.isValid(id)) throw new BadRequestException('ID no válido');
+    const payment = await this.paymentModel.findOne({ _id: id, isScheduled: true, deletedAt: null }).exec();
+    if (!payment) throw new NotFoundException(`Pago programado con ID ${id} no encontrado`);
+    payment.status = PaymentStatus.Completed;
+    return payment.save();
+  }
+
+  // Métodos existentes...
+  async findAll(): Promise<Payment[]> {
+    return this.paymentModel.find({ deletedAt: null, isScheduled: false }).exec();
+  }
+
   async findOne(id: string): Promise<Payment> {
     if (!Types.ObjectId.isValid(id)) throw new BadRequestException('ID no válido');
     const payment = await this.paymentModel.findOne({ _id: id, deletedAt: null }).exec();
@@ -42,7 +75,6 @@ export class PaymentService {
     return payment;
   }
 
-  // Actualizar un pago
   async update(id: string, updateData: UpdatePayment): Promise<Payment> {
     if (!Types.ObjectId.isValid(id)) throw new BadRequestException('ID no válido');
     const payment = await this.paymentModel.findOneAndUpdate(
@@ -54,7 +86,6 @@ export class PaymentService {
     return payment;
   }
 
-  // Soft delete
   async delete(id: string): Promise<Payment> {
     if (!Types.ObjectId.isValid(id)) throw new BadRequestException('ID no válido');
     const payment = await this.paymentModel.findOneAndUpdate(
@@ -66,7 +97,6 @@ export class PaymentService {
     return payment;
   }
 
-  // Restaurar pago eliminado
   async restore(id: string): Promise<Payment> {
     if (!Types.ObjectId.isValid(id)) throw new BadRequestException('ID no válido');
     const payment = await this.paymentModel.findOneAndUpdate(
@@ -78,20 +108,10 @@ export class PaymentService {
     return payment;
   }
 
-  // Marcar pago como completado usando studentId
-  async markStudentPaymentAsCompleted(studentId: string): Promise<Payment> {
-    if (!Types.ObjectId.isValid(studentId)) throw new BadRequestException('Student ID no válido');
-
-    const student = await this.studentModel.findById(studentId).exec();
-    if (!student) throw new NotFoundException('Student no encontrado');
-
-    // Obtener último pago activo
-    const paymentId = student.payments.reverse().find(pid => Types.ObjectId.isValid(pid));
-    if (!paymentId) throw new NotFoundException('No se encontró pago activo para este student');
-
+  async markPaymentAsCompleted(paymentId: string): Promise<Payment> {
+    if (!Types.ObjectId.isValid(paymentId)) throw new BadRequestException('Payment ID no válido');
     const payment = await this.paymentModel.findOne({ _id: paymentId, deletedAt: null }).exec();
-    if (!payment) throw new NotFoundException('Pago activo no encontrado');
-
+    if (!payment) throw new NotFoundException('Pago no encontrado');
     payment.status = PaymentStatus.Completed;
     return payment.save();
   }
