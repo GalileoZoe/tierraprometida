@@ -10,7 +10,7 @@ async function bootstrap() {
   app.use(urlencoded({ extended: true, limit: '50mb' }));
 
   // Establecer prefijo global para las rutas de la API
-  app.setGlobalPrefix('api/tierraprometida/v1');
+  app.setGlobalPrefix('savesmarth/api/v1/');
 
   // Habilitar CORS para permitir solicitudes desde otros orígenes
   
