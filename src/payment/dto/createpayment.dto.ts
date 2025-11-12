@@ -4,7 +4,7 @@ import { PaymentStatus } from 'src/payment/schema/payment.schema';
 
 export class CreatePayment {
   @IsOptional()
-  student?: Types.ObjectId; // Relación con Students, opcional para pruebas
+  student?: Types.ObjectId;
 
   @IsString()
   @IsOptional()
@@ -16,13 +16,17 @@ export class CreatePayment {
 
   @IsString()
   @IsOptional()
-  method?: string; // Ej. 'Card', 'Cash', 'Transfer'
+  method?: string;
 
   @IsEnum(PaymentStatus)
   @IsOptional()
-  status?: PaymentStatus; // Pending | Completed | Failed
+  status?: PaymentStatus;
+
+  @IsString()
+  @IsOptional()
+  date?: string;
 
   @IsBoolean()
   @IsOptional()
-  softdelete?: boolean; // true = eliminado, false = activo
+  softdelete?: boolean;
 }

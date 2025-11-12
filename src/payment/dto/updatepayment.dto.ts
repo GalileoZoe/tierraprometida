@@ -21,6 +21,10 @@ export class UpdatePayment {
   @IsEnum(PaymentStatus)
   @IsOptional()
   status?: PaymentStatus; // Pending | Completed | Failed
+  
+  @IsString()
+  @IsOptional()
+  date?: string;
 
   @IsBoolean()
   @IsOptional()

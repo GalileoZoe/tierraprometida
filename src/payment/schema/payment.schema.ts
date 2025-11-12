@@ -24,6 +24,9 @@ export class Payment {
   @Prop({ enum: PaymentStatus, default: PaymentStatus.Pending })
   status: PaymentStatus;
 
+  @Prop()
+  date: string;
+
   @Prop({ type: String }) // id del estudiante
   student?: string;
 
