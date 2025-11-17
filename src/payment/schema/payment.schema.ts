@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export type PaymentDocument = Payment & Document;
 
@@ -11,6 +11,9 @@ export enum PaymentStatus {
 
 @Schema({ timestamps: true })
 export class Payment {
+  
+  @Prop()
+  _id: Types.ObjectId;
 
   @Prop()
   concept: string;
@@ -45,6 +48,8 @@ export class Payment {
 
   @Prop({ type: Date, required: false })
   startDate?: Date;
+
+  datePaid: Date;
 }
 
 export const PaymentSchema = SchemaFactory.createForClass(Payment);

@@ -10,10 +10,11 @@ import { Students, StudentsSchema } from '../students/schema/students.schema';
   imports: [
     MongooseModule.forFeature([
       { name: Payment.name, schema: PaymentSchema },
-      { name: Students.name, schema: StudentsSchema }, // 👈 agrega esto
+      { name: Students.name, schema: StudentsSchema },
     ]),
   ],
   controllers: [PaymentController],
   providers: [PaymentService],
+  exports: [PaymentService],       // <-- 🔥 NECESARIO
 })
 export class PaymentModule {}

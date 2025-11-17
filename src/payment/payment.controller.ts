@@ -10,6 +10,30 @@ import { Payment } from './schema/payment.schema';
 export class PaymentController {
   constructor(private readonly paymentService: PaymentService) {}
 
+  // =============================================
+  //  NUEVO: Crear un Payment y devolver su _id
+  //  Para usarlo como external_reference en MP
+  // =============================================
+  @Post('mp/create')
+  async createForMercadoPago(
+    @Body(new ValidationPipe()) createPayment: CreatePayment
+  ) {
+    const payment = await this.paymentService.create(createPayment);
+
+    return {
+      message: 'Payment created for MercadoPago',
+      paymentId: payment._id,
+    };
+  }
+
+  @Post('mp/checkout/:paymentId')
+async createMercadoPagoCheckout(@Param('paymentId') paymentId: string) {
+  return this.paymentService.generateMercadoPagoCheckout(paymentId);
+}
+
+  // =============================================
+  //               CRUD NORMAL
+  // =============================================
   @Post()
   async create(@Body(new ValidationPipe()) createPayment: CreatePayment): Promise<Payment> {
     return this.paymentService.create(createPayment);
@@ -48,7 +72,9 @@ export class PaymentController {
     return this.paymentService.restore(id);
   }
 
-  // --- NUEVOS ENDPOINTS PROGRAMADOS ---
+  // =============================================
+  //           PROGRAMADOS
+  // =============================================
   @Post('scheduled')
   async createScheduled(@Body(new ValidationPipe()) createPayment: CreatePayment): Promise<Payment> {
     return this.paymentService.createScheduled(createPayment);
