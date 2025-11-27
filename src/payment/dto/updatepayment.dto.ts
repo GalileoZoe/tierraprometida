@@ -4,8 +4,8 @@ import { PaymentStatus } from '../schema/payment.schema';
 
 export class UpdatePayment {
 
-  @IsOptional()
-  _id?: Types.ObjectId;
+  // @IsOptional()
+  // _id?: Types.ObjectId;
 
   @IsOptional()
   student?: Types.ObjectId; // Relación con Students

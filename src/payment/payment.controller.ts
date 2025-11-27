@@ -14,17 +14,17 @@ export class PaymentController {
   //  NUEVO: Crear un Payment y devolver su _id
   //  Para usarlo como external_reference en MP
   // =============================================
-  @Post('mp/create')
-  async createForMercadoPago(
-    @Body(new ValidationPipe()) createPayment: CreatePayment
-  ) {
-    const payment = await this.paymentService.create(createPayment);
+  // @Post('mp/create')
+  // async createForMercadoPago(
+  //   @Body(new ValidationPipe()) createPayment: CreatePayment
+  // ) {
+  //   const payment = await this.paymentService.create(createPayment);
 
-    return {
-      message: 'Payment created for MercadoPago',
-      paymentId: payment._id,
-    };
-  }
+  //   return {
+  //     message: 'Payment created for MercadoPago',
+  //     paymentId: payment._id,
+  //   };
+  // }
 
   @Post('mp/checkout/:paymentId')
 async createMercadoPagoCheckout(@Param('paymentId') paymentId: string) {

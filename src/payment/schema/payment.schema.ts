@@ -12,8 +12,8 @@ export enum PaymentStatus {
 @Schema({ timestamps: true })
 export class Payment {
   
-  @Prop()
-  _id: Types.ObjectId;
+  // @Prop()
+  // _id: Types.ObjectId;
 
   @Prop()
   concept: string;
