@@ -25,113 +25,150 @@ class FileDTO {
 }
 
 export class UpdateUser {
+  @IsString()
+  @IsOptional()
+  number?: string;
 
-    @IsString()
-    @IsOptional()
-    number?: string;
+  @IsString()
+  @IsOptional()
+  name?: string;
 
-    @IsString()
-    @IsOptional()
-    name?: string;
+  @IsString()
+  @IsOptional()
+  lastname?: string;
 
-    @IsString()
-    @IsOptional()
-    lastname?: string;
+  @IsString()
+  @IsOptional()
+  username?: string;
 
-    @IsString()
-    @IsOptional()
-    username?: string;
+  @IsString()
+  @IsOptional()
+  gender?: string;
 
-    @IsString()
-    @IsOptional()
-    gender?: string;
+  @IsString()
+  @IsOptional()
+  blood?: string;
 
-    @IsString()
-    @IsOptional()
-    blood?: string;
+  @IsString()
+  @IsOptional()
+  age?: string;
 
-    @IsString()
-    @IsOptional()
-    age?: string;
+  @IsString()
+  @IsOptional()
+  curp?: string;
 
-    @IsString()
-    @IsOptional()
-    curp?: string;
+  @IsString()
+  @IsOptional()
+  email?: string;
 
-    @IsString()
-    @IsOptional()
-    email?: string;
+  @IsString()
+  @IsOptional()
+  password?: string;
 
-    @IsString()
-    @IsOptional()
-    password?: string;
+  @IsString()
+  @IsOptional()
+  phone?: string;
 
-    @IsString()
-    @IsOptional()
-    phone?: string;
+  @IsString()
+  @IsOptional()
+  address?: string;
 
-    @IsString()
-    @IsOptional()
-    address?: string;
+  @IsString()
+  @IsOptional()
+  disease?: string;
 
-    @IsString()
-    @IsOptional()
-    disease?: string;
+  @IsString()
+  @IsOptional()
+  allergy?: string;
 
-    @IsString()
-    @IsOptional()
-    allergy?: string;
+  @IsString()
+  @IsOptional()
+  drug?: string;
 
-    @IsString()
-    @IsOptional()
-    drug?: string;
+  @IsString()
+  @IsOptional()
+  stigma?: string;
 
-    @IsString()
-    @IsOptional()
-    stigma?: string;
+  @IsString()
+  @IsOptional()
+  treatment?: string;
 
-    @IsString()
-    @IsOptional()
-    treatment?: string;
+  @IsString()
+  @IsOptional()
+  tuthor?: string;
 
-    @IsString()
-    @IsOptional()
-    tuthor?: string;
+  @IsString()
+  @IsOptional()
+  stay?: string;
 
-    @IsString()
-    @IsOptional()
-    stay?: string;
+  // Nuevo campo reports
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => FileDTO)
+  @IsOptional()
+  files?: FileDTO[];
 
-    // Nuevo campo reports
-    @IsArray()
-    @ValidateNested({ each: true })
-    @Type(() => FileDTO)
-    @IsOptional()
-    files?: FileDTO[];
+  @IsString()
+  @IsOptional()
+  description?: string;
 
+  @IsString()
+  @IsOptional()
+  startdate?: string;
 
-    @IsString()
-    @IsOptional()
-    description?: string;
+  @IsString()
+  @IsOptional()
+  enddate?: string;
 
-    @IsString()
-    @IsOptional()
-    startdate?: string;
+  @IsOptional()
+  status?: UserStatus;
 
-    @IsString()
-    @IsOptional()
-    enddate?: string;
+  @IsOptional()
+  rol?: UserRol;
 
-    @IsOptional()
-    status?: UserStatus;
+  @IsOptional()
+  photo?: string;
 
-    @IsOptional()
-    rol?: UserRol;
+  @IsOptional()
+  avatar?: string;
 
-    // Nuevo campo reports
-    @IsArray()
-    @ValidateNested({ each: true })
-    @Type(() => ReportDTO)
-    @IsOptional()
-    reports?: ReportDTO[];
+  @IsOptional()
+  bio?: string;
+
+  @IsOptional()
+  online?: string;
+
+  @IsOptional()
+  lastOnline?: string;
+
+  @IsOptional()
+  lastseen?: string;
+
+  @IsOptional()
+  sync?: string;
+
+  @IsOptional()
+  touch?: string;
+  
+  @IsOptional()
+  Backup?: string;
+
+  @IsOptional()
+  lastBackup?: string;
+
+  @IsOptional()
+  notifications?: string;
+
+  @IsOptional()
+  settings?: string;
+
+  @IsOptional()
+  expoPushToken?: string;
+
+  // Nuevo campo reports
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => ReportDTO)
+  @IsOptional()
+  reports?: ReportDTO[];
 }

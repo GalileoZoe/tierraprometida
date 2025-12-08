@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Users } from './schema/users.schema';
+import { User } from './schema/users.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateUser } from './dto/createuser.dto';
@@ -9,7 +9,7 @@ import { UpdateUser } from './dto/updateuser.dto';
 export class UsersService {
 
     constructor(
-        @InjectModel( Users.name ) private UsersModel : Model<Users>
+        @InjectModel( User.name ) private UsersModel : Model<User>
     ){}
 
     async create( user: CreateUser ){

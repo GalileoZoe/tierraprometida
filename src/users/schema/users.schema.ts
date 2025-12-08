@@ -41,44 +41,97 @@ export class File {
 const ReportSchema = SchemaFactory.createForClass(Report);
 const FileSchema = SchemaFactory.createForClass(File);
 
-@Schema()
-export class Users extends Document {
+export type UserDocument = User & Document;
+
+@Schema({ timestamps: true })
+export class User {
+  @Prop()
+  name: string;
+
+  @Prop()
+  username: string;
+
+  @Prop()
+  email: string;
+
+  @Prop()
+  phone: string;
+
+  @Prop()
+  password: string;
+
+  @Prop()
+  photo: string;
+
+  @Prop()
+  avatar: string;
+
+  
+  @Prop()
+  address: string;
+
+  @Prop()
+  age: number;
+
+  @Prop()
+  gender: string;
+
+  @Prop()
+  bio: string;
+
+  @Prop()
+  rol: string;
+
+  @Prop()
+  status: string;
+
+  @Prop()
+  online: string;
+
+  @Prop()
+  lastOnline: string;
+
+  @Prop()
+  lastseen: string;
+
+  @Prop()
+  sync: string;
+
+  @Prop()
+  touchId:string;
+
+  @Prop()
+  Backup: string;
+
+  @Prop()
+  lastBackup: string;
+
+  @Prop()
+  notifications: string;
+
+  @Prop()
+  settings: string;
+
+  @Prop()
+  expoPushToken: string;
 
     @Prop()
     number?: string;
 
-    @Prop()
-    name?: string;
+
 
     @Prop()
     lastname?: string;
 
-    @Prop()
-    username?: string;
 
-    @Prop()
-    gender?: string;
 
     @Prop()
     blood?: string;
     
-    @Prop()
-    age?: string;
 
     @Prop()
     curp?: string;
 
-    @Prop()
-    email?: string;
-
-    @Prop()
-    password?: string;
-
-    @Prop()
-    phone?: string;
-
-    @Prop()
-    address?: string;
 
     @Prop()
     disease?: string;
@@ -116,14 +169,9 @@ export class Users extends Document {
     @Prop()
     enddate?: string;
 
-    @Prop({ default: UserStatus.Activo })
-    status?: UserStatus;
-
-    @Prop({ default: UserRol.Usuario })
-    rol?: UserRol;
 
     @Prop({ type: [ReportSchema], default: [] })
     reports?: Report[];
 }
 
-export const UsersSchema = SchemaFactory.createForClass(Users);
+export const UsersSchema = SchemaFactory.createForClass(User);
