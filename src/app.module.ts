@@ -10,6 +10,7 @@ import { IncomeModule } from './income/income.module';
 import { ExpenseModule } from './expense/expense.module';
 import { WebhookModule } from './webhook/webhook.module';
 import { EmailModule } from './email/email.module';
+import { AppointmentModule } from './appointment/appointment.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { EmailModule } from './email/email.module';
     ExpenseModule,
     WebhookModule,
     EmailModule,
+    AppointmentModule,
   ],
   providers: [],
 })

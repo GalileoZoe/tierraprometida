@@ -121,6 +121,9 @@ export class Students extends Document {
     @Prop({ type: [{ type: Types.ObjectId, ref: 'Payment' }] })
     payments?: Types.ObjectId[];
 
+    @Prop({ type: [{ type: Types.ObjectId, ref: 'Appointment' }] })
+    appointments?: Types.ObjectId[];
+
     // ✅ Campo para Soft Delete
     @Prop({ default: false })
     softdelete?: boolean;
