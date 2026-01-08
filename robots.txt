@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://galileozoe.github.io/tierraprometidawebsite/sitemap.xml

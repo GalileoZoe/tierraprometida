@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/tierraprometida/static/css/main.b7f5e378.css",
+    "main.js": "/tierraprometida/static/js/main.ac27eb6d.js",
+    "static/js/453.6cdc9542.chunk.js": "/tierraprometida/static/js/453.6cdc9542.chunk.js",
+    "static/media/AMOR3.PNG": "/tierraprometida/static/media/AMOR3.c44e24de3ed565b169d9.PNG",
+    "static/media/AMOR.png": "/tierraprometida/static/media/AMOR.ed73df83fb16fa9e4c42.png",
+    "static/media/img-07.png": "/tierraprometida/static/media/img-07.447c3828b6d022eec501.png",
+    "static/media/img-06.png": "/tierraprometida/static/media/img-06.61e3a389cf6cdcdf274f.png",
+    "static/media/img-00.png": "/tierraprometida/static/media/img-00.5fcaf7401543639477c9.png",
+    "static/media/img-02.png": "/tierraprometida/static/media/img-02.fde3ad448fb21f2c4e66.png",
+    "static/media/PRENSA.png": "/tierraprometida/static/media/PRENSA.9af272fd5803604fb5e4.png",
+    "static/media/img-01.png": "/tierraprometida/static/media/img-01.07aead7686853b6610c2.png",
+    "static/media/logo-04.png": "/tierraprometida/static/media/logo-04.3f4b26a3f2e15ed77622.png",
+    "static/media/a.png": "/tierraprometida/static/media/a.03cbcd91fd383fbbf395.png",
+    "static/media/logo-01.png": "/tierraprometida/static/media/logo-01.794306449004e4bcc670.png",
+    "static/media/logo-03.png": "/tierraprometida/static/media/logo-03.790fab8597c23e748ea2.png",
+    "static/media/logo-mercado-pago.png": "/tierraprometida/static/media/logo-mercado-pago.e1d2ec899a3bbfea3e3b.png",
+    "static/media/logo-02.png": "/tierraprometida/static/media/logo-02.a35183c1f41f1e970a9d.png",
+    "static/media/logo-00.png": "/tierraprometida/static/media/logo-00.95b4966df2a5944df7a4.png",
+    "static/media/logo-05.png": "/tierraprometida/static/media/logo-05.52a677a0aa58756edb64.png",
+    "static/media/logo-06.png": "/tierraprometida/static/media/logo-06.e6a42cb3558298c731d0.png",
+    "static/media/galileozoe-00.png": "/tierraprometida/static/media/galileozoe-00.2389f346a2443bcfbda9.png",
+    "static/media/logo-08.png": "/tierraprometida/static/media/logo-08.9a88a1d4d51c8c182c19.png",
+    "static/media/bancoppel.png": "/tierraprometida/static/media/bancoppel.a7210429f17a85de143e.png",
+    "static/media/logo-20.png": "/tierraprometida/static/media/logo-20.e6d0743539974b6d0f49.png",
+    "static/media/logo-001.png": "/tierraprometida/static/media/logo-001.9bcb49c6866027553f8d.png",
+    "static/media/logo-07.png": "/tierraprometida/static/media/logo-07.fa64d4d8518263f217c9.png",
+    "static/media/logo-09.png": "/tierraprometida/static/media/logo-09.25cca8f63e0a2b156d6f.png",
+    "static/media/inea.png": "/tierraprometida/static/media/inea.1d747dfef3de89eb6f2c.png",
+    "static/media/conocer.png": "/tierraprometida/static/media/conocer.90a431ce94a6f83411d7.png",
+    "index.html": "/tierraprometida/index.html",
+    "main.b7f5e378.css.map": "/tierraprometida/static/css/main.b7f5e378.css.map",
+    "main.ac27eb6d.js.map": "/tierraprometida/static/js/main.ac27eb6d.js.map",
+    "453.6cdc9542.chunk.js.map": "/tierraprometida/static/js/453.6cdc9542.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b7f5e378.css",
+    "static/js/main.ac27eb6d.js"
+  ]
+}
